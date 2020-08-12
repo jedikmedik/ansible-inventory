@@ -1,0 +1,5 @@
+# [xpaste_pg]
+# pg-[1:3]	pcmk_pool=xpaste_pg
+# #
+# [xpaste_pg_master]
+# pg-1

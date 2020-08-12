@@ -1,0 +1,16 @@
+# THIS FILE IS MANAGED BY ANSIBLE, ALL CHANGES WILL BE LOST
+
+server {
+    listen 80;
+    server_name {{ deploy_app }}.static;
+    root /home/{{ deploy_user }}/{{ deploy_app }}/public;
+
+    error_page 503 /503.html;
+    error_page 500 502 504 /500.html;
+    client_max_body_size 2G;
+
+    location / {
+	try_files $uri =404;
+    }
+}
+

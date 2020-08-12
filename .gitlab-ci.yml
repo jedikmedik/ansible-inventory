@@ -1,0 +1,21 @@
+---
+stages:
+  - site
+
+variables:
+  ANSIBLE_VERSION: latest
+  ANSIBLE_INVENTORY: ${CI_PROJECT_DIR}/hosts
+
+before_script:
+  - grep -Fq gitlab.slurm.io ~/.ssh/known_hosts || ssh-keyscan -t ed25519 gitlab.slurm.io >> ~/.ssh/known_hosts
+  - source ~/ansible-${ANSIBLE_VERSION}/bin/activate
+  - ansible-galaxy install -r requirements.yml
+
+site:
+  script:
+    - ansible-playbook site.yml --diff -e ansible_ssh_common_args=
+  stage: site
+  tags:
+    - ansible
+
+...

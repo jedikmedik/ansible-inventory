@@ -1,0 +1,41 @@
+---
+postgresql_roles:
+  - name: xpaste
+    password: frank9Above9Crux
+  - name: xpaste_test
+    password: cuckoo8scent4misty
+    attrs: "LOGIN,CREATEDB"
+  - name: replicator
+    password: Stall8Wear3inform
+    attrs: "LOGIN,REPLICATION"
+  - name: terraform_state
+    password: Tumble7Loss-Hawaii
+
+postgresql_db:
+  - name: xpaste
+  - name: xpaste_test
+  - name: terraform_state
+
+postgresql_hba_tcp:
+  - db: xpaste
+    user: xpaste
+    address: 172.16.0.0/12
+  - db: xpaste_test
+    user: xpaste_test
+    address: 172.16.0.0/12
+  - db: postgres
+    user: xpaste_test
+    address: 172.16.0.0/12
+  - db: replication
+    user: replicator
+    address: 172.16.100.0/24
+  - db: template1
+    user: replicator
+    address: 172.16.100.0/24
+  - db: terraform_state
+    user: terraform_state
+    address: 0.0.0.0/0
+
+postgresql_reload_direct: yes
+base_southbridge_repo: False
+...

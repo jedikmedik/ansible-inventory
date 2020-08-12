@@ -1,0 +1,70 @@
+---
+base_selinux_state: disabled
+
+base_add_packages_7:
+  - postgresql-libs
+
+base_add_packages_8:
+  - libpq
+
+nginx_vhost_files:
+  - www_vhost/static.conf.j2
+
+pgbouncer_config:
+  listen_addr: 127.0.0.1
+  listen_port: 5432
+  log_connections: 1
+  idle_transaction_timeout: 3600
+
+pgbouncer_db:
+  - name: xpaste
+    host: "{{ deploy_db_host }}"
+
+pgbouncer_user:
+  - name: xpaste
+    password: frank9Above9Crux
+
+useradd_users:
+  - name: xpaste
+    home_mode: "0755"
+  - name: gitlab-runner
+    files:
+      - src: deploy_key/id_ed25519
+        dest: .ssh/id_ed25519
+        mode: "0600"
+        dirmode: "0700"
+
+deploy_app: xpaste
+deploy_user: xpaste
+
+deploy_prod_db:
+  name: xpaste
+  user: xpaste
+  password: frank9Above9Crux
+  host: "{{ deploy_pg_node }}"
+
+deploy_secret_key_base: jkdf8xlandfkzz99alldlmernzp2mska7bghqp9akamzja7ejnq65ahjnfj
+
+deploy_prod_environment:
+  RAILS_ENV: production
+  SECRET_KEY_BASE: "{{ deploy_secret_key_base }}"
+  DB_HOST: "{{ deploy_prod_db['host'] }}"
+  DB_NAME: "{{ deploy_prod_db['name'] }}"
+  DB_USER: "{{ deploy_prod_db['user'] }}"
+  DB_PASSWORD: "{{ deploy_prod_db['password'] }}"
+
+rvm_puma:
+  - user: xpaste
+    version: 2.5.0
+    vars: >
+      {
+      {% for key, value in deploy_prod_environment|dictsort %}
+      "{{ key }}": "{{ value }}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      }
+
+rvm_ruby_version: 2.5.1
+
+nodejs_major_version: 8
+nodejs_yarn_install: yes
+...

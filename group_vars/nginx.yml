@@ -1,0 +1,8 @@
+---
+# nginx_modules_rpm:
+#   - nginx-module-lua
+
+# nginx_modules_so:
+#   - ndk_http_module.so
+#   - ngx_http_lua_module.so
+...

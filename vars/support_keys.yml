@@ -1,0 +1,34 @@
+---
+useradd_users:
+  - name: root
+    public_keys:
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCkpkkrD0MxlpR96KPzMZBSxxEXjMJaGHn3ObIJACg1nwZtN+xXZxvJFm95BEbWa9JHgd2wzq4Vvfhrav2/qu0Re7RgDjBUS9sW4JSCLTHn+z3tieGOseFmPoUkRPpLRbEjami7xiF4Vw/TDmR3MmXSSbIx0WtL2EuUWuinTV+F+pa1Wk9OB8J/33b9DIRBTiMKVdS4SBxkeHc1HWSadoZDHJeygNq9EjUgoqDQZwWV0iBVs4TvIu9DGURJAXT0b09uG0Aodbbj5xV0SzSymD/Xxe7K47xSd8SVFoJbINf5sFcE66tut2kyk+aHe0A+e6gjBdnJymYMTS6CaSsJ47kZ'
+        comment: a.amirkhonov@vs103.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDtNvFtq2/8EZKSA3s4zFbQJGr6GKIogbYI3mk2pA7nSlZ2HwxKnBi+jg7UffBowhgSjd9J5yb8ey1SyShrshs3c3siyes63C7wlMpTGyXOeKvjfOqdmJnRLhFYGjzlJva8g4BFShstLB8n2jcjwTjbjbdZSDhWbgoU8G8XmIOtEqPJGydR++8ORRdXUYmFN/nAJ7iYwllTByyAAE17mCLFOw4HtkhAoYmXbzzNkXLFbaZ4gbWKrhw6U4lYJ+D3Bamv0VJS1Rs+aEdVZa/3ScQ89R5hPL4oPB0Rr2cjAz4bhZvSTY2VdZvUHI5MowaHN1SJFZ1nWAQt7Tf9bzfml0rr'
+        comment: m.ibraev@vs66.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDot7RnWnsmB/StxrOyoykJ1DjSgE2mc7ajAmrr2vDG2VPWtxvpfdF9tiArJcsrafqHDR04b0/9aYYC1qxs6T9dE9+Yfkl906mf09WdN+kmd51uAkZh3c6Vb7s7/FNeFTXC6fz+n8qH3gMiSe7vqYJ1Z0VFObeC6MSWquRxotuaFkw4cOY56pUadknaJS056/GSqfhe0A85NIE/xB39Y8YSl/MJmmgHu+K7SBEgmLaEVokMAesKOGPaXjc+VLpSoysfvQnrnCa+/4rc4zaULDLPTS3vnbmIwVtivRkovc3RBctyUM35mt84s6ruq1VduVqnreVMpQr5VkGAfJX2jaIr'
+        comment: a.osipov@vs106.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCpv1mM/MLeha3YN1Rq/MG/3K7zgtj8ZABqxw87FbhbY91R0gHHJy0xncDTx92m/A+Fj5hoCykwPGTU0lgnCiWLoV7ISzLSHeMD/jSf7dF7u5XFOQzShS0uqupWTC0BDx7Www7zXvyfmDXmZUDugdE1miH99deEtrlwIbzFctO4ckBqEmkHf859LsPW8GJ8DGBp0KsN0ISk+dNbYgpPVK4jxT3yseXAMz4VbITH2wxLQP6NQrhgDlJ3xtRkajMrcZMCJPeJVN9UVSJ3G5soQzurZaNsAqaS/cPyR/IOIEMiYDIHo9SAp0Tt4lFqc0XsdW2fB6AM/CvHsUfB4t+5ZOEH'
+        comment: a.mukhametov@vs109.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDLGr53azBW5voSpra+fpuk4C+HNFMNQBts1CjQ0ZVH0EBK2xfJCxHcyMIh/15rZgYBQULGp9TY1F4idZFsXuv59ANPmYXiUeIhWI9yCyLHuPI93v6CQqSkM0J8DCNBOdg6dBcB2Eo32+Oe0GKj88pllQy3nUlt7kqdoaY+Ec9ZAWA4/4vf7WbI4f8+ddNkv3lzzIBcEiux9dkDOZ+xxpofMipTan01exwb3KkAuoU5kRrcvryHwBqvnKAy5UPmTSRmBPxEnfv5FV7zs0Ld/I5rWCEBVZnIoJX6UG3PEZ44722Opa4tr/evfQ50kl9kez6BW9aNikhLt5KPqf+Hh1yh'
+        comment: a.shvalov@vs93.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCi7wI47eYcUPo6pRmQls78qT/MHioBpQ3ilbUIbRI9aEH2X+lWtRmzk3SfuYutfq6ptT/QCh7FWZ+0GIT7jI6AHlt+k1MGmQB2ig75sUERkDtiojFrDTLyFglW+Jiw5OeAk38VL9BAe6NYXwwu1xX+nfyWoD3T9KJyuQRWHfPW1EA6QZB7cKEvONvYeWeOVZt+l6itx8GAz311/1QNBCQtwjuHhRRD/6y9u3nnVCeLohgdPVCKFHBZBkXAgGZtH/3D6bzi77jdfEAqfqsRFPzWo+Y9ax+z4XXSoS0dRG7/gisxZ8JOaWchxXbih4n0kI27NH+p1RfT/7sSn+wUl4Ez'
+        comment: atarasov@vs63.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC9qdRUEwLjdOXFXJbGaiqek8h+ydlnM8vykWc8Juz169YZoQl8W0oT5lVuW72aJBVU48DGpiyRiXZWg3KpD9uS6iAd6PG7rqUwMOQZHU2A8OCyOaeotOuirZA0kYk5p1/Jmoiin6xNxT8X8U41JkRnREeth2ydTe1DiE7InYo3+IgoTHhdauqsWuHeOferLZ+tZUfbVtPgcXJnNWsOhqZwaLcEEl7qt1oq/FAvNCSuZLwpYDZz/aeNigq82AMiiDKV5bx4F1TjPcSEs3lt4/0sBzsGiI4dBHYidrqYtnQfBq5r/CzUL+66y/Rp0oKzSB3RItFUNBocXcnEnhWVDFHr'
+        comment: integral_0@vs52.southbridge.ru
+      - data: 'AAAAC3NzaC1lZDI1NTE5AAAAIHSFWx3UNSrb39hnvvejiMcipIPFMEoOENQQuocyXzEa'
+        comment: i.sizykh@southbridge.ru
+        type: ssh-ed25519
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQChjp5fZGnHfv4VaDkFDGk5nnoZmrrng0r4qhF9WXGSi7ocwXKT2mYrO92gwAzNnfOWsk3ROC26hUJ3SYMGa0zC6o4MB8/FoqACVVDMEEGpPeUxximUtkeBybIlqcuWIbWS+QE24a66ZJQ4NKv5inafZHrIGYad+qFrkn//esgw+qwIsWT2FvktbtJHQO4BQVvY37TlySPRxGXUH4F8P73zCoz7fX4Vn3OmxBRiPkQWbiPPOdeZspFcBk3yk1z4yQ29KxInoEANXF5h/Fu1Kqbtw0ZlEIf9qkJBs4gAOtVQ8llsLXtBLsh84lX8ySYPC2lJXGaL87VQTeIPd4eg2c8z'
+        comment: p.selivanov@devbox.slurm.io
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDmGR9MlCAtX1S8FowB1i6OR2qyAd4/FoVUhI/ezfR355koEG4h3yF9Gfg1U3wpthqU8LoXoWHMmiMJvDlGKHL6REAFK+VGHyAIC+zDBWG5LdiT3zrmoIVsGf9HmSEC5vqOb/3YVCh4RfUkWkZM3xv9EBTnhXtn9kc/mH6pThuUJMEf4YwUpuPRyZlkR98g8yBZu444w9kFk2XVsM4bLFLGo8Yahj7yT8p8/M3RlucW7O/u6xmsyqIQoUT3YwC1dtHLsyOuEFaZqc7Gk7xx80Db7BeAQyiYDR8NB4wbmj+dGTT1EmgJziTkz8At9T+TrPKGMyAiUF3lcQ5ld6NMfW81'
+        comment: bond@vs50.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCnQupKb96p05bSXeFBnJ8ntD9Zz9XiLkEctgc1fqHjfAhdSvjy9Jc8d/dCOYULcb6mkjlrSnaxxUC6bEugUE0sm7WJ90zZrThk2aOyzh6o214tdgSqpA7Nk6+5sHB5hu8aaeaz+Vk/NBNR3E7yZ30oSnW4SLuWyW6h3uAdBRBtxITwFsnEaIVqJoeIBK5reBXt206LR6YmSFg5Ss3t2BVS07ExpSjcakCvuMk8GoLsPHZ1S4ojloRptAhXtss/9w4hoJ44p8AKXTh/4orD5NdgIkW1IKwJ8BElqPhyKiqv7A+pGATQCoSJZt57XhFJq8EXd3Q13z+zEqOgS7Mb/1bz'
+        comment: n.mesropyan@vs88.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQChiiBT4gR+ihVoLX7wMRjKKIMWKx43xpIdgU3zyaJ2ZhvLRfEPKppTI+QaRNtanFS7QdJZ7GLydfVqW4rD6UhZLEHz7Dji8ShWfhnCjRDI2RBB5Dfy4JqdodwxYw/jvmINx8z+TRuq6itrAuWXkvocJ/T64mBvj4NyDc5XJbx6N55LKRKnOSGNllXKjRC2O686wppV9opF10Y+T0pFlKT7TbiUvkLiIN1So3o7XrEgoU9xwrvl1EgzJzoNhfh/WlVmETGmva231IKOu8irSslcxlJy61WIU80bh9cEwjvPpHJ6tcGVm8IeTH5YWc45o/mE24s3p5zsELpLvw0A5zYh'
+        comment: sf@vs53.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC54j6XbVAd9Gz63Afc+/CpRvxVhKTyaxXiE0Whfjd1WYCzWG8rDDE4Z4cAhimsH9YOYA01+3gdiv7fuqxrlsXvWjjPCx8uchmftMvY7n3BNrs4nemkgdrtoghaOaR791R/L/CrjnSbsm3la+cxL+uM86JYoJdieagVrgRUgWvdOidxE9z6sln6VDX3QGo/0bIzyW49/7Woma9EdT0PRrHqE/xXULpvBAWS/l5yCmtBhwysy6jvfodE6uE4iSxEri+HpWt2AV0vaJUsPXO4aZ8fVE2d3qpU3J939sOgNJLlu/Y8qk+1pvAvPcoklbSGPcqTE6OLSHGQTk3NhvZSWZFd'
+        comment: nix@vs77.southbridge.ru
+      - data: 'AAAAB3NzaC1yc2EAAAABIwAAAQEA4bBmdYRnL0m6qn3YV3It3UqDusWgOBtCBomwEGi5uYO3areZARqAp3cMaMNoHkkIbk3ZGhCnO+lShiJmlEpWsdP1YDSxEgVBBYJA8V1nzSq8RZJ2CEWpcLRF2PJyedAUxFesTNXU/9FFMaTEXb225R1XhX2fZ+YIKvlP2bNuU21b0yOQvl1XVA+B+FaOPw3dgU3gEJe7yfUDiQuU2bLiYFA89v5KrV1LpnsEObDDY1uio7cdveq+Sd8J1Zm3r7EYk/Fn/NmUTPH6gAtirHE50DNXT5w2mZdGQdGppSzsqR4oUfNKQwEZIKxeRrUw03qV4sjeG4phRvlUYppGrFy2BQ=='
+        comment: gva
+...

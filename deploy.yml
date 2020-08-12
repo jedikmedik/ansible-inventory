@@ -1,0 +1,61 @@
+---
+# You may specify version/branch/commit for build (default is HEAD)
+# deploy_version: develop
+# vim: set ft=yaml.ansible:
+- name: Setup build environment and build the application
+  hosts: bastion
+
+  environment: >
+    {
+    {% for key, value in deploy_build_environment|dictsort %}
+    "{{ key }}": "{{ value }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+    }
+
+  tasks:
+    - name: Import Ruby deploy role
+      include_role:
+        name: deploy-ruby-1
+      tags: [ setup ]
+
+    - name: Import Ruby deploy role
+      include_role:
+        name: deploy-ruby-1
+      tags: [ build ]
+
+- name: Run test
+  hosts: bastion
+
+  environment: >
+    {
+    {% for key, value in deploy_test_environment|dictsort %}
+    "{{ key }}": "{{ value }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+    }
+
+  tasks:
+    - name: Import Ruby deploy role
+      include_role:
+        name: deploy-ruby-1
+      tags: [ test ]
+
+- name: Deploy or rolling update the application
+  hosts: www
+  serial: 1
+
+  vars:
+    ansible_user: root
+
+  environment: >
+    {
+    {% for key, value in deploy_prod_environment|dictsort %}
+    "{{ key }}": "{{ value }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+    }
+
+  tasks:
+    - name: Import Ruby deploy role
+      include_role:
+        name: deploy-ruby-1
+      tags: [ deploy ]
+...

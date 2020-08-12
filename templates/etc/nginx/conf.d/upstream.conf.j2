@@ -1,0 +1,20 @@
+# THIS FILE IS MANAGED BY ANSIBLE, ALL CHANGES WILL BE LOST
+upstream puma {
+{% for host in groups['www']|sort %}
+{% if deploy_state == 'begin' %}
+    server {{ hostvars[host].ansible_host }}:9292{{ (hostvars[host].inventory_hostname == inventory_hostname)|ternary(' down', '') }};
+{% elif deploy_state == 'end' %}
+    server {{ hostvars[host].ansible_host }}:9292;
+{% endif %}
+{% endfor %}
+}
+
+upstream static {
+{% for host in groups['www']|sort %}
+{% if deploy_state == 'begin' %}
+    server {{ hostvars[host].ansible_host }}:80{{ (hostvars[host].inventory_hostname == inventory_hostname)|ternary(' down', '') }};
+{% elif deploy_state == 'end' %}
+    server {{ hostvars[host].ansible_host }}:80;
+{% endif %}
+{% endfor %}
+}

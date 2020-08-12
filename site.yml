@@ -1,0 +1,70 @@
+---
+# vim: set ft=yaml.ansible:
+- name: Apply roles to all hosts
+  hosts: all
+
+  tasks:
+    - name: Import base role
+      include_role:
+        name: "{{ role }}"
+      loop:
+        - base
+        - prometheus
+      loop_control:
+        loop_var: role
+
+    - name: Include bastion roles
+      include_role:
+        name: "{{ role }}"
+      when: inventory_hostname in groups['jumpbox']
+      loop:
+        - nftables
+        - elastic
+        - terraform
+        - envoy
+      loop_control:
+        loop_var: role
+
+    - name: Include roles for db hosts
+      include_role:
+        name: "{{ role }}"
+      when: inventory_hostname in groups['db']
+      loop:
+        - postgresql
+        - pcmk
+      loop_control:
+        loop_var: role
+
+    - name: Include nginx role
+      include_role:
+        name: nginx
+      when: inventory_hostname in groups['nginx']
+
+    - name: Include roles for runners
+      include_role:
+        name: "{{ role }}"
+      when: inventory_hostname in groups['runners']
+      loop:
+        - pgbouncer
+        - gitlab-runner
+      loop_control:
+        loop_var: role
+
+    - name: Include useradd role
+      include_role:
+        name: useradd
+
+- name: Add support ssh keys in root's authorized_keys
+  hosts: all
+
+  vars:
+    ansible_user: root
+
+  vars_files:
+    - vars/support_keys.yml
+
+  tasks:
+    - name: Import useradd
+      import_role:
+        name: useradd
+...

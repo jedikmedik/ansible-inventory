@@ -1,0 +1,79 @@
+---
+# vim: set ft=yaml.ansible:
+- name: Runners preparing
+  hosts: bastion
+
+  vars:
+    env:
+      user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: Become section
+      block:
+        - name: Create BUNDLE_CACHE_PATH
+          file:
+            path: "{{ deploy_cache_path }}"
+            state: directory
+            mode: 0755
+      become: yes
+      become_user: gitlab-runner
+
+    - name: Generate deploy keys
+      user:
+        name: gitlab-runner
+        generate_ssh_key: yes
+        ssh_key_type: ecdsa
+
+    - name: Fetch gitlab-runner's public key
+      fetch:
+        src: /home/gitlab-runner/.ssh/id_ecdsa.pub
+        dest: "/tmp/gitlab-runner.pub.{{ env.user }}"
+        flat: yes
+
+- name: Pubkey bootstrap
+  hosts: all
+
+  vars:
+    env:
+      user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: Put pubkey in the authorized_keys
+      authorized_key:
+        user: root
+        key: "{{ lookup('file', '/tmp/gitlab-runner.pub.' ~ env.user) }}"
+
+    - name: Remove pubkey
+      file:
+        path: "/tmp/gitlab-runner.pub.{{ env.user }}"
+        state: absent
+      delegate_to: localhost
+      vars:
+        ansible_python_interpreter: /usr/bin/python
+
+- name: Create local ssh config
+  hosts: localhost
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+    env:
+      home: "{{ lookup('env','HOME') }}"
+      user: "{{ lookup('env','USER') }}"
+
+  tasks:
+    - name: Create ssh include dir
+      file:
+        path: "{{ env.home }}/.ssh/conf.d"
+        state: directory
+        owner: "{{ env.user }}"
+        group: "{{ env.user }}"
+        mode: 0700
+
+    - name: Template .ssh/config
+      template:
+        src: ssh/config.j2
+        dest: "{{ env.home }}/.ssh/conf.d/xpaste"
+        owner: "{{ env.user }}"
+        group: "{{ env.user }}"
+        mode: 0600
+...

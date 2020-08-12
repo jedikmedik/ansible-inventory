@@ -1,0 +1,15 @@
+---
+ansible_user: root
+ansible_python_interpreter: /usr/bin/python3
+
+base_southbridge_repo: True
+base_zsh_enable: False
+
+postgresql_version: 11
+
+base_add_packages:
+  - rsyslog
+
+prom_cmdline:
+  tsdb_retention_time: 2h
+...

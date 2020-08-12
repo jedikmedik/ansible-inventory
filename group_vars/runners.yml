@@ -1,0 +1,17 @@
+---
+runner_url: https://gitlab.slurm.io/
+
+# Place your group token here
+runner_reg_token: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+
+runner_config:
+  custom_build_dir: true
+  concurrent: 2
+
+deploy_lb_node: "{{ groups['lb']|first }}"
+deploy_pg_node: 127.0.0.1
+
+deploy_db_host: "{{ groups['db']|first }}"
+# deploy_db_host: 172.16.100.100
+...

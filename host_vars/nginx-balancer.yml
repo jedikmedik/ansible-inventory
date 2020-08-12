@@ -1,0 +1,11 @@
+---
+nginx_vhost_files:
+  - lb_vhost/xpaste-front.conf.j2
+
+deploy_user: xpaste
+deploy_app: xpaste
+
+prom_nginxlog_exporter: yes
+
+base_selinux_state: disabled
+...

@@ -1,0 +1,10 @@
+---
+# vim: set ft=yaml.ansible:
+- name: Dummy playbook for SSH known hosts flushing
+  hosts: all
+
+  tasks:
+    - name: True
+      command: >
+        true
+...

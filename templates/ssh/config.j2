@@ -1,0 +1,11 @@
+Host bastion.{{ env.user }} bastion
+    User            root
+    Hostname        {{ hostvars['bastion']['ansible_host'] }}
+    ForwardAgent    yes
+{% for host in groups['www']|union(groups['db'])|union(groups['lb'])|sort %}
+
+Host {{ host }}
+    User            root
+    Hostname        {{ hostvars[host]['ansible_host'] }}
+    ProxyCommand    ssh bastion.{{ env.user }} -W %h:%p
+{% endfor %}

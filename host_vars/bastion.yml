@@ -1,0 +1,122 @@
+---
+base_add_packages_8:
+  - python3-psycopg2
+
+base_sysctl_vars:
+  net.ipv4.ip_forward: 1
+
+base_selinux_state: disabled
+
+nftables:
+  ip:
+    nat:
+      prerouting:
+        - iif "ens3" tcp dport { postgresql } dnat to 172.16.100.100
+      postrouting:
+        - ip daddr 172.16.100.100 oif "ens3" snat to {{ ansible_default_ipv4['address'] }}
+
+pgbouncer_config:
+  listen_addr: 127.0.0.1
+  listen_port: 5432
+  log_connections: 1
+  server_lifetime: 0
+
+pgbouncer_db:
+  - name: postgres
+    host: "{{ deploy_db_host }}"
+  - name: xpaste_test
+    host: "{{ deploy_db_host }}"
+
+pgbouncer_user:
+  - name: xpaste_test
+    password: cuckoo8scent4misty
+
+useradd_users:
+  - name: gitlab-runner
+    files:
+      - src: deploy_key/id_ed25519
+        dest: .ssh/id_ed25519
+        mode: "0600"
+        dirmode: "0700"
+
+deploy_app: xpaste
+deploy_user: xpaste
+
+deploy_build_packages:
+  - postgresql-devel
+  - libxslt-devel
+  - libxml2-devel
+  - glibc-devel
+  - gcc-c++
+
+deploy_secret_key_base: jkdf8xlandfkzz99alldlmernzp2mska7bghqp9akamzja7ejnq65ahjnfj
+
+deploy_cache_path: /home/gitlab-runner/.cache/vendor
+
+deploy_build_environment:
+  RAILS_ENV: production
+  SECRET_KEY_BASE: "{{ deploy_secret_key_base }}"
+  BUNDLE_CACHE_PATH: "{{ deploy_cache_path }}"
+
+deploy_test_db:
+  name: xpaste_test
+  user: xpaste_test
+  password: cuckoo8scent4misty
+  host: "{{ deploy_pg_node }}"
+
+deploy_test_environment:
+  RAILS_ENV: test
+  SECRET_KEY_BASE: "{{ deploy_secret_key_base }}"
+  DB_HOST: "{{ deploy_test_db['host'] }}"
+  DB_NAME: "{{ deploy_test_db['name'] }}"
+  DB_USER: "{{ deploy_test_db['user'] }}"
+  DB_PASSWORD: "{{ deploy_test_db['password'] }}"
+
+rvm_ruby_version: 2.5.1
+
+nodejs_major_version: 8
+nodejs_yarn_install: yes
+
+elk_es_options:
+  network.host: '0.0.0.0'
+  http.port: 9200
+  xpack.security.enabled: "false"
+  xpack.monitoring.enabled: "false"
+
+elk_es_jvm_options:
+  Xms: 512m
+  Xmx: 512m
+
+elk_install_kibana: yes
+
+elk_kibana_options:
+  server.port: 5601
+  server.host: '0.0.0.0'
+  elasticsearch.url: http://127.0.0.1:9200
+
+prom_master: true
+prom_grafana: true
+prom_blackbox_exporter: true
+prom_alertmanager: true
+
+runner_ansible: true
+runner_ansible_version: 2.8.7
+
+runner_ansible_cfg:
+  - section: defaults
+    options:
+      host_key_checking: "False"
+      retry_files_enabled: "False"
+      vault_password_file: $HOME/.vpasswd
+      strategy_plugins: /usr/lib/python3.6/site-packages/ansible_mitogen/plugins/strategy
+      strategy: mitogen_linear
+      callback_whitelist: yaml
+      stdout_callback: yaml
+      force_color: "True"
+
+runner_tags:
+  - ansible
+
+terraform:
+  version: 0.12.19
+...

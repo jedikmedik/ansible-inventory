@@ -1,0 +1,61 @@
+---
+- src: git@gitlab.slurm.io:ansible-roles/system/base.git
+  scm: git
+  version: v1.4
+
+- src: git@gitlab.slurm.io:ansible-roles/system/nftables.git
+  scm: git
+  version: v0.2
+
+- src: git@gitlab.slurm.io:ansible-roles/system/pcmk.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/system/terraform.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/system/useradd.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/ci/deploy-ruby-1.git
+  scm: git
+  version: v1.4
+
+- src: git@gitlab.slurm.io:ansible-roles/ci/gitlab-runner.git
+  scm: git
+  version: v2.0
+
+- src: git@gitlab.slurm.io:ansible-roles/mon/elastic.git
+  scm: git
+  version: v1.1
+
+- src: git@gitlab.slurm.io:ansible-roles/mon/envoy.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/mon/prometheus.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/pg/postgresql.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/pg/pgbouncer.git
+  scm: git
+  version: v1.4
+
+- src: git@gitlab.slurm.io:ansible-roles/web/nginx.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/web/nodejs.git
+  scm: git
+  version: v1.0
+
+- src: git@gitlab.slurm.io:ansible-roles/web/rvm.git
+  scm: git
+  version: v1.2
+...

@@ -1,0 +1,118 @@
+---
+# vim: set ft=yaml.ansible:
+- name: DEPLOY PACEMAKER/PGSQL CLUSTER
+  hosts: xpaste_pg
+  become: yes
+
+  vars:
+    pg_master: "{{ groups[pcmk_pool ~ '_master']|first }}"
+    pg_ctl: "/usr/pgsql-{{ postgresql_version }}/bin/pg_ctl"
+    pg_data: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    pg_lock_file: /var/lib/flags/pgsql_pcmk_resource_created
+
+  tasks:
+    - name: Get lock file stats
+      stat:
+        path: "{{ pg_lock_file }}"
+      register: pg_reg_lock
+
+    - name: master section
+      block:
+        - name: Start postgresql
+          become_user: postgres
+          command: >
+            {{ pg_ctl }} -D {{ pg_data }} start
+          args:
+            creates: "{{ pg_data }}/postmaster.pid"
+          register: pg_reg_start
+          changed_when: >
+            'started' in pg_reg_start.stdout
+
+        - name: Run postgresql role for user setup
+          include_role:
+            name: postgresql
+            tasks_from: roles.yml
+
+        - name: Get max_wal_senders value
+          become_user: postgres
+          command: >
+            psql -AXtc "SHOW max_wal_senders"
+          register: pg_reg_senders
+
+        - name: Restart postgresql
+          become_user: postgres
+          command: >
+            {{ pg_ctl }} -D {{ pg_data }} restart
+          when: pg_reg_senders.stdout|int < 2
+      when:
+        - inventory_hostname == pg_master
+        - not pg_reg_lock.stat.exists
+
+    - name: slave section
+      block:
+        - name: Stop postgresql on replicas
+          become_user: postgres
+          command: >
+            {{ pg_ctl }} -D {{ pg_data }} stop
+          register: pg_reg_stop
+          failed_when: >
+            pg_reg_stop is failed and
+            'Is server running' not in pg_reg_stop.stderr and
+            'does not exist' not in pg_reg_stop.stderr and
+            'is not a database cluster directory' not in pg_reg_stop.stderr
+          changed_when: >
+            'stopped' in pg_reg_stop.stdout
+
+        - name: Flush data dir
+          become_user: postgres
+          file:
+            path: "{{ pg_data }}"
+            state: absent
+
+        - name: Recreate data dir
+          become_user: postgres
+          file:
+            path: "{{ pg_data }}"
+            state: directory
+            mode: 0700
+
+        - name: Run postgresql role for pgpass setup
+          include_role:
+            name: postgresql
+            tasks_from: pgpass.yml
+
+        - name: Get replicas
+          become_user: postgres
+          command: >
+            pg_basebackup --host {{ hostvars[pg_master]['ansible_host'] }}
+            --username replicator --pgdata {{ pg_data }}
+            --wal-method stream --status-interval 2
+      when:
+        - inventory_hostname != pg_master
+        - not pg_reg_lock.stat.exists
+
+    - name: Stop postgresql
+      become_user: postgres
+      command: >
+        {{ pg_ctl }} -D {{ pg_data }} stop
+      register: pg_reg_stop
+      changed_when: >
+        'stopped' in pg_reg_stop.stdout
+      when:
+        - inventory_hostname == pg_master
+        - not pg_reg_lock.stat.exists
+
+    - name: Execute pcs script
+      command: >
+        /srv/southbridge/scripts/pgsql.pcs
+      when:
+        - inventory_hostname == pg_master
+        - not pg_reg_lock.stat.exists
+
+    - name: Touch lock
+      file:
+        path: "{{ pg_lock_file }}"
+        state: touch
+        mode: 0400
+      changed_when: false
+...
